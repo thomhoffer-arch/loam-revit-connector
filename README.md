@@ -6,12 +6,14 @@ This repository will implement a **model source** for Autodesk Revit, exposing R
 
 ## Status: Early Stage
 - **1 commit**: Contract defined, implementation pending.
-- **Target**: Expose the following 5 primitives (aligned with PDRA):
+- **Target**: Expose the following 5 primitives (aligned with [REVIT_MODEL_SOURCE_CONTRACT.md](https://github.com/thomhoffer-arch/loam/blob/main/docs/connectors/REVIT_MODEL_SOURCE_CONTRACT.md)):
   1. `get_model_revision` — Returns the current Revit model revision.
   2. `filter_elements_by_scope_box` — Filters Revit elements by a scope box.
   3. `get_element_by_uniqueid` — Retrieves an element by Revit UniqueId.
   4. `get_element_by_ifcguid` — Retrieves an element by IFC GUID.
   5. `get_door_rooms` — Retrieves door-room relationships.
+
+> **Note**: Tool names are **snake_case wire names** (not camelCase). The contract doc above specifies the exact request/response shapes, endpoint, and field names.
 
 ---
 
@@ -31,3 +33,4 @@ This repository will implement a **model source** for Autodesk Revit, exposing R
 - [Mycelium (Connective Spine)](https://github.com/thomhoffer-arch/Mycelium)
 - [Loam (Orchestrator)](https://github.com/thomhoffer-arch/Loam)
 - [PDRA (Revit MCP Tools)](https://github.com/thomhoffer-arch/PDRA)
+- [Full Contract Spec (REVIT_MODEL_SOURCE_CONTRACT.md)](https://github.com/thomhoffer-arch/loam/blob/main/docs/connectors/REVIT_MODEL_SOURCE_CONTRACT.md)
