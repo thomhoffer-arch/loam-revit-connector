@@ -1,27 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <RootNamespace>Loam.Revit.Connector</RootNamespace>
     <AssemblyName>LoamRevitConnector</AssemblyName>
     <PlatformTarget>x64</PlatformTarget>
     <UseWindowsForms>false</UseWindowsForms>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <!--
+    Revit API per version (RevitAPI.dll, RevitAPIUI.dll — not redistributable).
+    Resolution order:
+      1. -p:RevitApiDir=<path>            (explicit override, any build)
+      2. -p:RevitVersion=2024|2025|2026   (picks the matching default install path)
+      3. TFM default: net48 -> Revit 2024, net8.0-windows -> Revit 2026
+  -->
+  <PropertyGroup>
+    <RevitApiDir Condition="'$(RevitApiDir)' == '' AND '$(RevitVersion)' == '2024'">C:\Program Files\Autodesk\Revit 2024</RevitApiDir>
+    <RevitApiDir Condition="'$(RevitApiDir)' == '' AND '$(RevitVersion)' == '2025'">C:\Program Files\Autodesk\Revit 2025</RevitApiDir>
+    <RevitApiDir Condition="'$(RevitApiDir)' == '' AND '$(RevitVersion)' == '2026'">C:\Program Files\Autodesk\Revit 2026</RevitApiDir>
+    <RevitApiDir Condition="'$(RevitApiDir)' == '' AND '$(TargetFramework)' == 'net48'">C:\Program Files\Autodesk\Revit 2024</RevitApiDir>
+    <RevitApiDir Condition="'$(RevitApiDir)' == '' AND '$(TargetFramework)' == 'net8.0-windows'">C:\Program Files\Autodesk\Revit 2026</RevitApiDir>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <!--
-    Revit API assemblies (RevitAPI.dll, RevitAPIUI.dll) are not redistributable.
-    Set RevitApiDir to your local Revit install (default: C:\Program Files\Autodesk\Revit 2024).
-  -->
-  <PropertyGroup>
-    <RevitApiDir Condition="'$(RevitApiDir)' == ''">C:\Program Files\Autodesk\Revit 2024</RevitApiDir>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="RevitAPI">
       <HintPath>$(RevitApiDir)\RevitAPI.dll</HintPath>
