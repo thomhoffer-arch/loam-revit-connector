@@ -28,7 +28,7 @@ namespace Loam.Revit.Connector.RevitBridge
             };
         }
 
-        public static object ToFullElement(Element e, Profile profile, bool found)
+        public static object ToFullElement(Element e, ConnectorProfile profile, bool found)
         {
             if (!found || e == null)
                 return new { unique_id = (string)null, found = false };
@@ -84,7 +84,7 @@ namespace Loam.Revit.Connector.RevitBridge
             return (opt.Name, primary);
         }
 
-        public static object BuildClassification(Element e, Profile profile)
+        public static object BuildClassification(Element e, ConnectorProfile profile)
         {
             string code = null, desc = null;
             foreach (var p in profile.ClassificationCodeParams ?? new List<string>())

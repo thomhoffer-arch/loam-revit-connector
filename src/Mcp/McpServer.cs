@@ -22,7 +22,7 @@ namespace Loam.Revit.Connector.Mcp
         private HttpListener _listener;
         private bool _running;
 
-        public McpServer(string prefix, string token, RevitContext ctx, Profile profile)
+        public McpServer(string prefix, string token, RevitContext ctx, ConnectorProfile profile)
         {
             // Listen at the host root so both /mcp and /mcp/ (and any subpath) reach us.
             // HttpListener prefix matching is strict on the trailing slash, and Loam's

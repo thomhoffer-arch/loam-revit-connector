@@ -6,7 +6,7 @@ namespace Loam.Revit.Connector.Profiles
 {
     /// Profile = firm-specific parameter and category mappings.
     /// Per the spec, door/room field names come from here (nl.json by default).
-    public class Profile
+    public class ConnectorProfile
     {
         public string Id { get; set; } = "nl";
 
@@ -30,10 +30,10 @@ namespace Loam.Revit.Connector.Profiles
 
     public static class ProfileLoader
     {
-        public static Profile Load(string path)
+        public static ConnectorProfile Load(string path)
         {
-            if (!File.Exists(path)) return new Profile();
-            return JsonConvert.DeserializeObject<Profile>(File.ReadAllText(path)) ?? new Profile();
+            if (!File.Exists(path)) return new ConnectorProfile();
+            return JsonConvert.DeserializeObject<ConnectorProfile>(File.ReadAllText(path)) ?? new ConnectorProfile();
         }
     }
 }

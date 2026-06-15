@@ -10,8 +10,8 @@ namespace Loam.Revit.Connector.Mcp.Tools
     public class FilterElementsByScopeBoxTool : IMcpTool
     {
         private readonly RevitContext _ctx;
-        private readonly Profile _profile;
-        public FilterElementsByScopeBoxTool(RevitContext ctx, Profile profile) { _ctx = ctx; _profile = profile; }
+        private readonly ConnectorProfile _profile;
+        public FilterElementsByScopeBoxTool(RevitContext ctx, ConnectorProfile profile) { _ctx = ctx; _profile = profile; }
 
         public string Description =>
             "Returns elements of a category whose bounding box intersects the given scope box. Set inside_only=true to require fully inside.";

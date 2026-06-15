@@ -11,8 +11,8 @@ namespace Loam.Revit.Connector.Mcp.Tools
     public class GetDoorRoomsTool : IMcpTool
     {
         private readonly RevitContext _ctx;
-        private readonly Profile _profile;
-        public GetDoorRoomsTool(RevitContext ctx, Profile profile) { _ctx = ctx; _profile = profile; }
+        private readonly ConnectorProfile _profile;
+        public GetDoorRoomsTool(RevitContext ctx, ConnectorProfile profile) { _ctx = ctx; _profile = profile; }
 
         public string Description =>
             "Returns from/to rooms per door, plus clear-width param and type name (carries dm## and _mk tokens).";

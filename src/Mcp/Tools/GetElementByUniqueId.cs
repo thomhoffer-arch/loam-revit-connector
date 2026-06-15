@@ -8,8 +8,8 @@ namespace Loam.Revit.Connector.Mcp.Tools
     public class GetElementByUniqueIdTool : IMcpTool
     {
         private readonly RevitContext _ctx;
-        private readonly Profile _profile;
-        public GetElementByUniqueIdTool(RevitContext ctx, Profile profile) { _ctx = ctx; _profile = profile; }
+        private readonly ConnectorProfile _profile;
+        public GetElementByUniqueIdTool(RevitContext ctx, ConnectorProfile profile) { _ctx = ctx; _profile = profile; }
 
         public string Description => "Resolves elements by Revit UniqueId; returns found=false for misses.";
         public object InputSchema => new

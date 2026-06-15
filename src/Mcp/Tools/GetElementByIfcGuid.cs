@@ -9,8 +9,8 @@ namespace Loam.Revit.Connector.Mcp.Tools
     public class GetElementByIfcGuidTool : IMcpTool
     {
         private readonly RevitContext _ctx;
-        private readonly Profile _profile;
-        public GetElementByIfcGuidTool(RevitContext ctx, Profile profile) { _ctx = ctx; _profile = profile; }
+        private readonly ConnectorProfile _profile;
+        public GetElementByIfcGuidTool(RevitContext ctx, ConnectorProfile profile) { _ctx = ctx; _profile = profile; }
 
         public string Description => "Resolves elements by IfcGUID. Loam drops misses — only emit found=true rows.";
         public object InputSchema => new
