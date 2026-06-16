@@ -27,6 +27,10 @@ The five tools — snake_case wire names, dispatched to PDRA's `IPdraTool` imple
 4. `get_element_by_ifcguid`
 5. `get_door_rooms`
 
+Plus one optional tool — `get_project_info` (`{}` → `{ name, number, client?, address?, building? }`
+from `Document.ProjectInformation`). Additive: when present it lets Loam auto-seed the project; absent,
+Loam degrades to learning the project from mail.
+
 PDRA names the tools `pdra_get_model_revision` etc. internally; the MCP listener accepts **both** forms but advertises the unprefixed contract names via `tools/list`.
 
 ---
