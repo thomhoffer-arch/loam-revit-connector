@@ -16,6 +16,7 @@ The five read primitives Loam calls today are implemented, contract-correct, and
 the connector wraps them as MCP tools without re-deriving any Revit logic):
 
 - [x] `get_model_revision`
+- [x] `get_project_info` *(optional — `Document.ProjectInformation` → enables Loam auto-seed)*
 - [x] `filter_elements_by_scope_box`
 - [x] `get_element_by_uniqueid`
 - [x] `get_element_by_ifcguid`

@@ -42,6 +42,7 @@ namespace Loam.Revit.Connector.Mcp
             foreach (var t in new IPdraTool[]
             {
                 new GetModelRevisionTool(),
+                new GetProjectInfoTool(),
                 new FilterElementsByScopeBoxTool(),
                 new GetElementByUniqueIdTool(),
                 new GetElementByIfcGuidTool(),

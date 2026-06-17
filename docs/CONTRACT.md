@@ -33,16 +33,31 @@ the connector implements.)
 
 ### 1. `get_model_revision`
 Request: `{}`
+
 ```json
 { "version_guid": "string", "number_of_saves": 42, "has_unsaved_changes": false }
 ```
+
 Used for the freshness stamp + the project pulse. `has_unsaved_changes: true` warns that CC may not
 yet reflect the model.
+
+### 1b. `get_project_info`  *(optional — enables auto-seed)*
+Request: `{}`
+
+```json
+{ "name": "Lomans Nieuwbouw", "number": "2024-013", "client": "string", "address": "string", "building": "string" }
+```
+
+Source: Revit `Document.ProjectInformation` (`Name`, `Number`, `ClientName`, `Address`, `BuildingName`).
+Only `name` + `number` are required; the rest are optional. Loam uses these to **auto-seed the project**
+in its directory so email attributes to it (no manual seeding). If a backend doesn't implement this,
+Loam degrades to learning the project from mail — so it's additive/optional, not a breaking change.
 
 ### 2. `filter_elements_by_scope_box`
 Request: `{ "scope_box_id": 123, "category": "OST_Doors", "inside_only": true }`
 (Loam calls this once per category in the profile's `scopeBox.categories`. `category` is a **string**,
 not an array.)
+
 ```json
 {
   "count_in": 12,
@@ -61,6 +76,7 @@ not an array.)
   ]
 }
 ```
+
 Field semantics Loam reads:
 - **`unique_id`** — Revit UniqueId, the **primary identity** (stable across sessions).
 - **`id`** — numeric Revit ElementId. **Required** — `get_door_rooms` keys on it.
@@ -75,6 +91,7 @@ Loam also accepts `elements` under `results`, a bare array, or a top-level id ar
 
 ### 3. `get_element_by_uniqueid`
 Request: `{ "unique_ids": ["…", "…"] }`
+
 ```json
 {
   "elements": [
@@ -90,6 +107,7 @@ Request: `{ "unique_ids": ["…", "…"] }`
   ]
 }
 ```
+
 - `found: false` (or omit the element) when not resolvable.
 - **Classification is the finance join.** Provide the code under `classification.assembly_code`
   (or top-level `assembly_code`, or `omniclass`). For the `nl` profile it must match the NL-SfB
@@ -103,6 +121,7 @@ Request: `{ "ifc_guids": ["…"] }` → same element shape, keyed on `ifc_guid`.
 ### 5. `get_door_rooms`
 Request: `{ "element_ids": [1234567, …], "scope_box_id": 123, "limit": 500 }`
 (`element_ids` are the **numeric** ids from #2.)
+
 ```json
 {
   "doors": [
@@ -118,6 +137,7 @@ Request: `{ "element_ids": [1234567, …], "scope_box_id": 123, "limit": 500 }`
   ]
 }
 ```
+
 Field semantics Loam reads (door clear-width rule, Bbl-4.180):
 - **clear width** — under one of `NLRS_C_breedte_01` / `breedte_01` / `clear_width` / `width`
   (profile `door.clearWidthParam`). Millimetres; a value `< 10` is treated as metres (×1000).
