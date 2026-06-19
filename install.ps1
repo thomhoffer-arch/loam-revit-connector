@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Build, deploy, and register the Loam Revit Connector.
 
