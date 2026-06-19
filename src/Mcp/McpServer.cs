@@ -47,6 +47,11 @@ namespace Loam.Revit.Connector.Mcp
                 new GetElementByUniqueIdTool(),
                 new GetElementByIfcGuidTool(),
                 new GetDoorRoomsTool(),
+                new GetSheetsTool(),
+                new GetLevelsTool(),
+                new GetRoomsTool(),
+                new GetViewsTool(),
+                new GetLinksTool(),
             })
             {
                 _tools[t.Name] = t;                       // pdra_*
