@@ -119,4 +119,4 @@ if (-not $SkipClaude) {
 Write-Host ""
 Write-Host "Done. Start Revit $RevitVersion, open a project, then verify:" -ForegroundColor Cyan
 Write-Host "  Invoke-RestMethod -Method Post -Uri $Url -ContentType application/json ``" -ForegroundColor Gray
-Write-Host "    -Body '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}'" -ForegroundColor Gray
+Write-Host "    -Body '{`"jsonrpc`":`"2.0`",`"id`":1,`"method`":`"initialize`",`"params`":{}}'" -ForegroundColor Gray
